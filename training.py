@@ -69,7 +69,7 @@ for t in range(200):
     print('Epoch: ', t)
     num = solver.train_gcn_adapt(t)
     best_acc = solver.test(t)
-    #update the Loss and Accuracy of train and validate
+    #update the Accuracy of train and validate
     writer.add_scalar('best_acc', best_acc, t)
 
 ARI = np.around(adjusted_rand_score(np.array(best_acc[1]),np.array(best_acc[0])),5)
