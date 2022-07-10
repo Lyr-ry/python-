@@ -521,7 +521,7 @@ class Solver(object):
         cluster_false = torch.zeros(self.nclasses).cuda()
         cluster_size = torch.zeros(self.nclasses).cuda()
         
-
+        
         for batch_idx, data in enumerate(self.datasets):
             if batch_idx > self.target_size/self.batch_size:
                 break
@@ -547,6 +547,9 @@ class Solver(object):
             
 
         test_loss = test_loss / size
+        
+        #update the Loss of train and validate
+        writer.add_scalar('best_acc', best_acc, t)
 
         if correct > self.best_correct:
             self.best_correct = correct
