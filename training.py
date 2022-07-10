@@ -8,6 +8,11 @@ import csv
 
 random.seed(1111)
 
+# import module related to tensionboard for generate working journal
+from torch.utils.tensorboard import SummaryWriter
+# creat working journal and store at assigned path
+writer = SummaryWriter('/output/logs')
+
 #data reading
 temp_mat1 = np.array([])
 label1 = []
@@ -64,6 +69,8 @@ for t in range(200):
     print('Epoch: ', t)
     num = solver.train_gcn_adapt(t)
     best_acc = solver.test(t)
+    #update the Loss and Accuracy of train and validate
+    writer.add_scalar('best_acc', best_acc, t)
 
 ARI = np.around(adjusted_rand_score(np.array(best_acc[1]),np.array(best_acc[0])),5)
 AMI = np.around(adjusted_mutual_info_score(np.array(best_acc[1]),np.array(best_acc[0])),5)
