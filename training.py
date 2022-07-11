@@ -10,26 +10,41 @@ import matplotlib.pyplot as plt
 random.seed(1111)
 
 #data reading
-temp_mat1 = np.array([])
+temp_mat1 = []
 label1 = []
 with open('/home/qukun/dingyiemail/lyr/brain/brain5096_train.csv','r') as fp:
-    reader=csv.reader(fp)
-    for x in reader:
-        temp = np.array(x[0:-1])
-        temp_mat1 = np.r_[temp_mat1,temp]
-        label1.extend(temp[-1])
+    tempstr = fp.readlines()
+    for i in range(len(tempstr)):
+        temp_mat1.append([])
+        x = tempstr[i].split(',')
+        for j in range(len(x)-1):
+            temp_mat1[i].append(x[j])
+        if i == len(tempstr)-1:
+            labelstr = x[-1]
+        else:
+            labelstr = x[-1][0:-1]
+        label1.append(labelstr)
+temp1 = np.array(temp_mat1)
         
-temp_mat_t1 = np.array([])
-label_t1 = []
-with open('/home/qukun/dingyiemail/lyr/brain/brain5096_test.csv','r') as fp:
-    reader=csv.reader(fp)
-    for x in reader:
-        temp = np.array(x[0:-1])
-        temp_mat_t1 = np.r_[temp_mat_t1,temp]
-        label_t1.extend(temp[-1])
+
+temp_mat2 = []
+label2 = []
+with open('/home/qukun/dingyiemail/lyr/brain/brain5096_train.csv','r') as fp:
+    tempstr = fp.readlines()
+    for i in range(len(tempstr)):
+        temp_mat2.append([])
+        x = tempstr[i].split(',')
+        for j in range(len(x)-1):
+            temp_mat2[i].append(x[j])
+        if i == len(tempstr)-1:
+            labelstr = x[-1]
+        else:
+            labelstr = x[-1][0:-1]
+        label2.append(labelstr)
+temp2 = np.array(temp_mat2)
         
-rna_mats = [temp_mat1,temp_mat_t1]
-labels = [label1,label_t1]
+rna_mats = [temp1,temp2]
+labels = [label1,label2]
 
 #gain the value of nclasses
 n = len(set(label1))
