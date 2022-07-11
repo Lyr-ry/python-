@@ -21,7 +21,7 @@ with open('/data/liyiran666/brain/brain/brain5096_train.csv','r') as fp:
     for x in reader:
         temp = np.array(x[0:-1])
         temp_mat1 = np.r_[temp_mat1,temp]
-        label1 = label1.extend(temp[-1])
+        label1.extend(temp[-1])
         
 # temp_mat2 = np.array([])
 # label2 = []
@@ -30,7 +30,7 @@ with open('/data/liyiran666/brain/brain/brain5096_train.csv','r') as fp:
 #     for x in reader:
 #         temp = np.array(x[0:-1])
 #         temp_mat1 = np.r_[temp_mat2,temp]
-#         label2 = label2.extend(temp[-1])
+#         label2.extend(temp[-1])
         
 # temp_mat3 = np.array([])
 # label3 = []
@@ -39,7 +39,7 @@ with open('/data/liyiran666/brain/brain/brain5096_train.csv','r') as fp:
 #     for x in reader:
 #         temp = np.array(x[0:-1])
 #         temp_mat3 = np.r_[temp_mat3,temp]
-#         label3 = label3.extend(temp[-1])
+#         label3.extend(temp[-1])
         
 # temp_mat4 = np.array([])
 # label4 = []
@@ -48,7 +48,7 @@ with open('/data/liyiran666/brain/brain/brain5096_train.csv','r') as fp:
 #     for x in reader:
 #         temp = np.array(x[0:-1])
 #         temp_mat4 = np.r_[temp_mat4,temp]
-#         label4 = label4.extend(temp[-1])
+#         label4.extend(temp[-1])
 
 temp_mat_t1 = np.array([])
 label_t1 = []
@@ -57,7 +57,7 @@ with open('/data/liyiran666/brain/brain/brain5096_test.csv','r') as fp:
     for x in reader:
         temp = np.array(x[0:-1])
         temp_mat_t1 = np.r_[temp_mat_t1,temp]
-        label_t1 = label_t1.extend(temp[-1])
+        label_t1.extend(temp[-1])
         
 rna_mats = [temp_mat1,temp_mat_t1]
 labels = [label1,label_t1]
