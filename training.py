@@ -31,14 +31,17 @@ with open('/home/qukun/dingyiemail/lyr/brain/brain5096_test.csv','r') as fp:
 rna_mats = [temp_mat1,temp_mat_t1]
 labels = [label1,label_t1]
 
-solver = Solver(rna_mats=rna_mats, labels=labels)
+#gain the value of nclasses
+n = len(set(label1))
+
+solver = Solver(rna_mats=rna_mats, labels=labels,nclasses=n)
 
 acc_l = []
 loss_l = []
 x_l = []
 
 #train scMRA model for 200 epochs
-for t in range(30):
+for t in range(50):
     print('Epoch: ', t)
     num = solver.train_gcn_adapt(t)
     best_acc,loss = solver.test(t)
