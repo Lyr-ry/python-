@@ -60,9 +60,9 @@ class Autoencoder(nn.Module):
 #count_thr: cell types with a count less than count_thr in a training batch will not be calculated in the loss funtion
 #unas_thr, use_filter, filter_index: parameters for entropy based novelty detection
 class Solver(object):
-    def __init__(self, rna_mats, labels, nclasses, z_dim=32, encodeLayer=[256,64], decodeLayer=[256,64],
+    def __init__(self, rna_mats, labels, nclasses = 12, z_dim=32, encodeLayer=[256,64], decodeLayer=[256,64],
                  nfeat=32, sigma=1/np.exp(4.5), entropy_thr=10, Lambda_global=200, Lambda_local=0.001, beta=0.65, alpha=1.0,
-                 use_target=1, ndomain=4, highly_variable=2000, batch_size=256, activation='relu', 
+                 use_target=1, ndomain=4, highly_variable=2000, batch_size=512, activation='relu', 
                  count_thr=0, unas_thr=2.0, use_filter=False, filter_index=False, 
                  learning_rate=0.1, interval=2, optimizer='adam', checkpoint_dir=None, save_epoch=10):
         
@@ -104,7 +104,7 @@ class Solver(object):
 
         # define the feature extractor and GCN-based classifier  
         self.Autoencoder = Autoencoder(input_size, z_dim, nclasses, encodeLayer, decodeLayer, activation)
-        self.GCN = GCN(nfeat=nfeat, nclasses=nclasses)
+        self.GCN = GCN(nfeat=nfeat, nclasses=nclasses, placeholders=None, input_dim=3)
         self.Autoencoder.cuda()
         self.GCN.cuda()
         print('Model initialized!')
@@ -507,7 +507,7 @@ class Solver(object):
         return batch_idx
 
     # per epoch test on target domain
-    def test(self, epoch, record_file='/home/qukun/dingyiemail/lyr/output/record.txt', save_model=False):
+    def test(self, epoch, record_file=False, save_model=False):
         self.Autoencoder.eval()
         self.GCN.eval()
 
