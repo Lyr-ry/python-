@@ -8,6 +8,7 @@ import numpy as np
 #define dataloader for multi-reference datasets
 #this is an example for 3 source/1 test multi-reference dataset
 
+"""
 class PairedData(object):
     def __init__(self, data_loader_A, data_loader_B, data_loader_C, data_loader_t, max_dataset_size):
         self.data_loader_A = data_loader_A
@@ -117,6 +118,7 @@ class UnalignedDataLoader():
     def __len__(self):
         return min(max(len(self.dataset_s1),len(self.dataset_s2),len(self.dataset_s3),len(self.dataset_t)), float("inf"))
 
+"""
     
 # If your meta-Dataset contains 2 reference datasets and 1 target dataset, activate this function
 """
@@ -200,7 +202,7 @@ class UnalignedDataLoader():
 
 
 # If your meta-Dataset contains 1 reference datase and 1 target dataset, activate this function
-"""
+
 class PairedData(object):
     def __init__(self, data_loader_A, data_loader_t, max_dataset_size):
         self.data_loader_A = data_loader_A
@@ -259,4 +261,3 @@ class UnalignedDataLoader():
         return self.paired_data
     def __len__(self):
         return min(max(len(self.dataset_s1),len(self.dataset_t)), float("inf"))
-"""
